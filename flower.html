@@ -6,11 +6,76 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/main.css">
     <link rel="icon" href="img/flowers.png" type="image/x-icon">
+   <script src="main.js"></script>
+   <style>
+    audio {
+    display: none;
+}
+
+.greetings {
+    font-size: xxx-large;
+    top: 20px;
+    position: fixed;
+    z-index: 999999;
+}
+
+.greetings > span{
+    animation: glow 2.5s ease-in-out infinite;
+}
+@keyframes glow{
+    0%, 100%{
+        color: #fff;
+        text-shadow: 0 0 12px #40b0bd, 0 0 50px #39c6d6, 0 0 100px #39c6d6;
+    }
+    10%, 90%{
+        color: #111;
+        text-shadow: none;
+    }
+}
+.greetings > span:nth-child(2){
+    animation-delay: .2s ;
+}
+.greetings > span:nth-child(3){
+    animation-delay: .4s ;
+}
+.greetings > span:nth-child(4){
+    animation-delay: .6s;
+}
+.greetings > span:nth-child(5){
+    animation-delay: .8s;
+}
+
+button#btncl {
+    position: fixed;
+    margin-bottom: 110px;
+    font-size: larger;
+    /* background-color: #fff; */
+}
+   </style>
+
     <title>flowers</title>
 </head>
 <body class="container">
-  <!-- Pembuat code: https://codepen.io/mdusmanansari/pen/BamepLe -->
-    <div class="night"></div>
+  <audio id="myAudio">
+    <source src="tangem.mp3" type="audio/ogg">
+    <source src="tangem.mp3" type="audio/mpeg">
+  </audio>
+  
+  <div class="night"></div>
+  <div class="greetings">
+
+        <span>Q</span>
+        <span>u</span>
+        <span>ỳ</span>
+        <span>n</span>
+        <span>h</span>
+        <span>T</span>
+        <span>h</span>
+	<span>ư</span>
+
+       
+
+    </div>
     <div class="flowers">
       <div class="flower flower--1">
         <div class="flower__leafs flower__leafs--1">
@@ -307,6 +372,7 @@
         </div>
       </div>
     </div>
+    <button id="btncl" onclick="playAudios()" type="button">Music</button>
     <script src="main.js"></script>
   </body>
 </html>
