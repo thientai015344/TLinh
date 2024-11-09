@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .giuamanghinh {
+        margin: 50% auto;
+        text-align: justify;
+    }
+    #demo {
+        text-align: justify;
+        font: 1em sans-serif;
+        font-weight: bold;
+        line-height: 30px;
+    }
+
+</style>
+<body>
+
+    <div class="giuamanghinh"></div>
+    <p id="demo"></p>
+    <audio id="myAudio">
+        <source src="dd.mp3" type="audio/ogg">
+        <source src="dd.mp3" type="audio/mpeg">
+    </audio>
+    <button id="playButton" style="display: none; font-size: 16px;">Bấm vaò đây</button>
+</body>
+
+<script>
+    var i = 0;
+    var firstRun = true; // Flag to track the first run
+    var noiDung = 'cảm ơn em đã xem đến đây <3 .<br> Đáng lý ra cái này được gửi cho em vào tối hôm trước nhưng anh muốn dùng cái này để bày tỏ những điều mà anh muốn nói với em nên anh mới để đến hôm nay.<br> hmmmm<br> tối hôm nay là ngày cuối rồi nhỉ mọi thứ, thời gian trôi qua thật nhanh em nhỉ <br> Cảm ơn em.<br> Cảm ơn em vì đã đồng hành cùng anh chuyến này.<br> Vì có em nên chuyến đi chơi này đã vui hơn rất nhiều, không chỉ anh mà còn cả mấy đứa nhỏ cũng cảm nhận được sự dễ chịu, gần gũi khi có em<br> Những khoảnh khắc em cười đùa cùng mọi người, đã làm trái tim anh rung động. Anh nhận ra, bên cạnh em, anh không chỉ tìm thấy niềm vui mà còn tìm thấy cảm giác gì đó lạ lắm . Em không chỉ là một người bạn đồng hành, mà dường như còn là một phần đặc biệt làm nên ý nghĩa của chuyến đi này với anh.<br>Anh hy vọng rằng đây không chỉ là một hành trình ngắn ngủi, mà sẽ còn nhiều chuyến đi khác mà anh có thể cùng em trải nghiệm. <br>Cảm ơn em vì đã mang lại cho anh cảm giác đặc biệt này<br>Một lần nữa cảm ơn đã tham gì và là một phần quan trọng của chuyến đi này của anh.';
+    var tocDo = 100;
+
+    function hieuUngDanhChu() {
+        if (firstRun) {
+            firstRun = false; // Update flag to false after first call
+            initOnce(); // Call the function only once
+        }
+        if (i < noiDung.length) {
+            if (noiDung.charAt(i) === "<") {
+                let tag = "";
+                while (noiDung.charAt(i) !== ">") {
+                    tag += noiDung.charAt(i++);
+                }
+                tag += ">";
+                document.getElementById("demo").innerHTML += tag;
+                i++;
+            } else {
+                document.getElementById("demo").innerHTML += noiDung.charAt(i);
+                i++;
+            }
+            setTimeout(hieuUngDanhChu, tocDo);
+        }
+    }
+
+    function initOnce() {
+        var audio = document.getElementById('myAudio');
+        // Attempt to play audio directly, but if it fails due to restrictions, show a button
+        var playPromise = audio.play();
+        if (playPromise !== undefined) {
+            playPromise.catch(function() {
+                var button = document.getElementById('playButton');
+                button.style.display = 'block';
+                button.addEventListener('click', function() {
+                    audio.play();
+                    button.style.display = 'none';
+                    hieuUngDanhChu(); // Start text effect after interaction
+                });
+            });
+        }
+    }
+
+    // Start text effect without audio if possible; otherwise, user must interact
+    hieuUngDanhChu();
+</script>
+</html>
