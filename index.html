@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>NH</title>
+        <title>TL</title>
     </head>
     <style>
         * {
@@ -147,6 +147,40 @@ button.start {
   justify-content: center;
   align-items: center;
 }
+
+.wrapper {
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+    width: 80%;
+    /* background-color: #333; */
+    /* color: #fff; */
+    font-size: 24px;
+    padding: 13px 0px;
+    display: flex
+;
+    /* align-items: center; */
+    justify-content: space-between;
+    width: 430px;
+    margin: 0 auto;
+    }
+
+    .slider-container {
+      flex: 1; 
+      margin: 0 10px; 
+    }
+
+    .sliderer_text {
+      display: inline-block;
+      white-space: nowrap;
+      position: absolute;
+      will-change: transform;
+    }
+
+    strong {
+      color: #ff6b6b;
+      flex-shrink: 0; /* Không cho strong thu nhỏ */
+    }
         </style>
     <body>
         
@@ -175,9 +209,15 @@ button.start {
             
         </p>
         <audio  id="autoplay" src="H.mp3"></audio>
-        <h3 class="STARDUST1"><strong>2024</strong> </h3>
-
-        <h3 class="STARDUST3"><strong>❤</strong> Cảm ơn em ! <strong>❤</strong> </h3>
+        <h3 class="STARDUST1"><strong>2025</strong> </h3>
+ h
+        <h3 class="STARDUST3 wrapper ">
+            <strong>❤</strong>
+            <div class="slider-container">
+              <span class="sliderer_text">Em biết gì không!   hong biết em có nhớ không nhỉ,  hình như chúng ta đã nói chuyện rất lâu trước đây rồi nhỉ,   nhưng mãi đến hôm trước lần đâù anh gặp em á tự nhiên em bị say em ạ nghe giống kiểu bị yêu em từ cái nhìn đầu tiên ấy nhỉ hhh.. à! Có 1 điều đặt biệt làm cho anh ấn tượng của cái hôm anh gặp em là gì em biết không...! mà chắc em khum biết đâu .. đó là em không giống người bình thường .. đọc tới đây đừng vội nghĩ gì sâu xa nha .. ý anh ở đây là em không giống người bình thường ở chổ là .. người bình thường ngta chỉ cười bằng miệng, em thì lại có thêm đôi mắt biết cười mặc dù nó được che đi bởi 1 cặp kính nhưng nó không thể che hết được cái nét đó cụa em. Nhưng mà công nhận là Em cười đẹp lắm luôn, chúc em mãi luôn vui cười như vậy nhé. Anh thích nụ cười của em lắm á, hmmmm!   nó thật đáng yêu. Vậy nên hãy cười nhiều hơn nữa nhé. Nhìn em cười anh nhớ tới đoạn thơ ông bà ta ngày xưa hay nói .. "Em cười như ánh ban mai" "Xua tan giá lạnh ngày dài đêm đông" "dịu dàng như tuyết mùa đông" "Hồn nhiên nét đẹp đêm ngày anh mong" Anh chế đó chứ thơ ông bà anh chả nhớ đâu "hehe"  "Em biết không Trên thế hiện tại tính đến bây giờ có  8,09 tỷ người tương đương  8,09 tỷ nụ cười khác nhau, nhưng đối với anh nụ cười của em vẫn là đẹp nhất. Thế nên là làm ơnnnn là hãy để anh giúp em giữ nụ cười em trên môi nhá .. Tới đây là hết rồi nè chúc em về nhà ăn tết với gia đình vui vẻ nhá!! anh đợi em vào  </span>
+            </div>
+            <strong>❤</strong>
+        </h3>
         </h1>
         <div class="img-con" id="imageContainer">
             
@@ -190,6 +230,7 @@ button.start {
     </body>
 </html>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
 <script>
     function shuffle(array) {
@@ -205,7 +246,7 @@ button.start {
     for (let i = 0; i < shuffledImages.length; i++) {
         const img = document.createElement('img');
         img.className = 'Hlides';
-        img.src = `anh/${shuffledImages[i]}.jpeg`; 
+        img.src = `anh/${shuffledImages[i]}.JPG`; 
         document.getElementById('imageContainer').appendChild(img); 
     }
     
@@ -214,9 +255,6 @@ button.start {
         $(".STARDUST2").hide();
         $(".STARDUST3").hide();
     })
-    
-    let cycleCount = 0; // Counter to track image cycles
-    const maxCycles = 2; // Number of cycles to complete
     
     function start() { 
         var audio = document.getElementById('autoplay');
@@ -264,18 +302,13 @@ button.start {
                     "animation": `fall${i} ${t1}s -${t2}s linear infinite`
                 }).appendTo($("body"));
         }
-    
-        audio.addEventListener('ended', function() {
-            if (cycleCount >= maxCycles) {
-                window.location.href = 'done.html'; 
-            }
-        });
-    
+
         setTimeout(() => {
             $(".words").hide();
             $(".STARDUST2").show();
             $(".STARDUST3").show();
             $(".img-con").fadeIn(2000);
+            animateText();
         }, 15000);
     }
     
@@ -290,18 +323,36 @@ button.start {
     slideIndex++;
     if (slideIndex > x.length) {
         slideIndex = 1;
-        cycleCount++; // Increment cycle counter each time we complete a full loop
-
-        // Check if we have completed the desired number of cycles
-        if (cycleCount >= maxCycles) {
-            window.location.href = 'done.html'; 
-            return; // Stop the function to prevent further calls
-        }
     }
 
     x[slideIndex-1].style.display = "block";
     setTimeout(carousel, 2000);
 }
+
+
+const textElement = document.querySelector('.sliderer_text');
+
+    // Đặt lại nội dung lặp lại
+    const textContent = textElement.textContent;
+    textElement.textContent = textContent 
+
+    // Lấy kích thước của phần tử
+    const textWidth = textElement.offsetWidth;
+    const containerWidth = document.querySelector('.slider-container').offsetWidth;
+
+    // Đặt vị trí bắt đầu
+    let position = containerWidth;
+
+    function animateText() {
+      position -= 1; // Tốc độ di chuyển (điều chỉnh số này để thay đổi tốc độ)
+      if (position <= -textWidth) {
+        position = containerWidth; // Reset vị trí
+      }
+      textElement.style.transform = `translateX(${position}px)`;
+      requestAnimationFrame(animateText); // Lặp lại animation
+    }
+
+ 
     </script>
     
 
